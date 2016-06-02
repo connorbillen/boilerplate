@@ -9,6 +9,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-cucumber');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');    
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-string-replace');
 
   grunt.initConfig({
@@ -18,17 +20,6 @@ module.exports = function(grunt) {
           {
             expand: true,
             src: ['app/css/*'],
-            dest: 'public/css/',
-            filter: 'isFile'
-          }
-        ]
-      },
-      bulma: {
-        files: [
-          {
-            expand: true,
-            cwd: 'node_modules/bulma/css/',
-            src: ['bulma.min.css'],
             dest: 'public/css/',
             filter: 'isFile'
           }
@@ -44,15 +35,7 @@ module.exports = function(grunt) {
       },
       all: ['Gruntfile.js', 'features/step_definitions/**/*.js', 'app/js/**/*.js']
     },
-
-    uglify: {
-      scripts: {
-        files: {
-          'public/js/script.js': ['app/js/**/*.js']
-        }
-      }        
-    },
-
+ 
     'string-replace': {
       inline: {
         files: {
@@ -62,14 +45,45 @@ module.exports = function(grunt) {
           replacements: [
             {
               pattern: /(<script src=".*?" type=".*?"><\/script>)/g,
-              replacement: '<script src="js/script.js" type="text/javascript"></script>'
+              replacement: '<script src="js/script.min.js" type="text/javascript"></script>'
             },
             {
-              pattern: /(<link rel="stylesheet" href=".*?bulma.*?" type=".*?">)/g,
-              replacement: '<link rel="stylesheet" href="css/bulma.min.css" type="text/css">'
+              pattern: /(<link rel="stylesheet" href=".*?" type=".*?">)/g,
+              replacement: '<link rel="stylesheet" href="css/style.min.css" type="text/css">'
             }
           ]
         }
+      }
+    },
+
+    concat: {
+      css: {
+        src: ['app/css/**/*.css', 'node_modules/bulma/css/bulma.min.css'],
+        dest: 'public/css/style.css',
+      },
+      js: {
+        src: ['app/js/**/*.js'],
+        dest: 'public/js/script.js',
+      },
+    },
+
+    uglify: {
+      scripts: {
+        files: {
+          'public/js/script.min.js': ['public/js/script.js']
+        }
+      }        
+    },
+
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'public/css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/css',
+          ext: '.min.css'
+        }]
       }
     }
   });
@@ -129,7 +143,9 @@ module.exports = function(grunt) {
     'runCmd:.:npm:install',
     'jshint',
     'copy',
+    'string-replace',
+    'concat',
     'uglify',
-    'string-replace'
+    'cssmin'
   ]);
 };
