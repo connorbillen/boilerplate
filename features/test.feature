@@ -1,10 +1,10 @@
-Feature: Test Feature Name 
+Feature: Boilerplate Feature 
 
-  As a user
-    I want to be able to test Test 
+  As a developer
+    I want to be able to always pass this test 
 
-#  Test (base)
-  @us21194
-  Scenario: Get Data Categories
-    When I request my data categories without channels
-    Then I should see my data categories
+#  Boilerplate Feature (base)
+  @test
+  Scenario: Run Boilerplate test without errors
+    When I test a basic assertion
+    Then Everything should pass without issue
