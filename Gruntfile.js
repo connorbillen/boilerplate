@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
-  var pkg = require('./package.json');
+  // var pkg = require('./package.json');
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -17,8 +17,18 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'files',
             src: ['app/css/*'],
+            dest: 'public/css/',
+            filter: 'isFile'
+          }
+        ]
+      },
+      bulma: {
+        files: [
+          {
+            expand: true,
+            cwd: 'node_modules/bulma/css/',
+            src: ['bulma.min.css'],
             dest: 'public/css/',
             filter: 'isFile'
           }
@@ -55,8 +65,8 @@ module.exports = function(grunt) {
               replacement: '<script src="js/script.js" type="text/javascript"></script>'
             },
             {
-              pattern: /(<link rel="stylesheet" href=".*?" type=".*?">)/g,
-              replacement: '<link rel="stylesheet" href="css/style.css" type="text/css">'
+              pattern: /(<link rel="stylesheet" href=".*?bulma.*?" type=".*?">)/g,
+              replacement: '<link rel="stylesheet" href="css/bulma.min.css" type="text/css">'
             }
           ]
         }
@@ -77,12 +87,15 @@ module.exports = function(grunt) {
         grunt.fail.fatal(err, code);
         next(code);
       } else {
+        if (result) { 
+          console.log('Command result: ' + result);
+        }
         grunt.log.ok();
         next();
       }
     });
 
-    if (typeof deployTask === 'undefined') {
+    if (!deployTask) {
       grunt.fail.fatal(cmd + ' task failed. Is \''+cmd+'\' on PATH?');
     }
     deployTask.stdout.on('data', function (buf) {
