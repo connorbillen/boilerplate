@@ -93,6 +93,25 @@ module.exports = function(grunt) {
     });
   });
 
+  grunt.registerTask('cuke', function(tags) {
+    var remoteURL = grunt.option('remoteURL') || 'http://localhost:1337';
+
+    process.env.remoteURL = remoteURL;
+    process.env.CUKE_TAGS = tags;
+
+    grunt.initConfig({
+      cucumberjs: {
+        src: 'features',
+        options: {
+          steps: 'features/step_definitions',
+          tags : tags.split('&')
+        }
+      }
+    });
+
+    grunt.task.run('cucumberjs');
+  });
+
   grunt.registerTask('build', [
     'runCmd:.:npm:install',
     'jshint',
