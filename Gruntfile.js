@@ -44,6 +44,18 @@ module.exports = function(grunt) {
         options: {
           replacements: [
             {
+              pattern: /(<script src=".*?underscore-min.*?" type=".*?"><\/script>)/g,
+              replacement: ''
+            },
+            {
+              pattern: /(<script src=".*?jquery.*?" type=".*?"><\/script>)/g,
+              replacement: ''
+            },
+            {
+              pattern: /(<script src=".*?backbone.*?" type=".*?"><\/script>)/g,
+              replacement: ''
+            },
+            {
               pattern: /(<script src=".*?" type=".*?"><\/script>)/g,
               replacement: '<script src="js/script.min.js" type="text/javascript"></script>'
             },
@@ -62,7 +74,7 @@ module.exports = function(grunt) {
         dest: 'public/css/style.css',
       },
       js: {
-        src: ['app/js/**/*.js'],
+        src: ['node_modules/underscore/underscore-min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/backbone/backbone-min.js', 'app/js/**/*.js'],
         dest: 'public/js/script.js',
       },
     },
