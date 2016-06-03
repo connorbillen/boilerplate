@@ -5,9 +5,7 @@ var TestView = Backbone.View.extend({
     this.render();
   }, 
   render: function() {
-    var template = _.template($('#TestTemplate').html());
-
-    this.$el.html(template(this.model.toJSON()));
+    this.$el.html(ejs.render(TestTemplate, this.model.toJSON()));
     this.stickit();
   },
   events: {
