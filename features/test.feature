@@ -6,5 +6,6 @@ Feature: Boilerplate Feature
 #  Boilerplate Feature (base)
   @test
   Scenario: Run Boilerplate test without errors
+    Given that I am testing
     When I test a basic assertion
-    Then Everything should pass without issue
+    Then everything should pass without issue

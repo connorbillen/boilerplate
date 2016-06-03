@@ -56,6 +56,10 @@ module.exports = function(grunt) {
               replacement: ''
             },
             {
+              pattern: /(<script src="http.*?" type=".*?"><\/script>)/g,
+              replacement: '<script src="js/script.min.js" type="text/javascript"> </script>'
+            },
+            {
               pattern: /(<script src=".*?" type=".*?"><\/script>)/g,
               replacement: '<script src="js/script.min.js" type="text/javascript"></script>'
             },
@@ -153,6 +157,15 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'runCmd:.:npm:install',
+    'jshint',
+    'copy',
+    'string-replace',
+    'concat',
+    'uglify',
+    'cssmin'
+  ]);
+
+  grunt.registerTask('quick', [
     'jshint',
     'copy',
     'string-replace',
