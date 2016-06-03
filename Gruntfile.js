@@ -44,23 +44,11 @@ module.exports = function(grunt) {
         options: {
           replacements: [
             {
-              pattern: /(<script src=".*?underscore-min.*?" type=".*?"><\/script>)/g,
-              replacement: ''
-            },
-            {
-              pattern: /(<script src=".*?jquery.*?" type=".*?"><\/script>)/g,
-              replacement: ''
-            },
-            {
-              pattern: /(<script src=".*?backbone.*?" type=".*?"><\/script>)/g,
-              replacement: ''
-            },
-            {
-              pattern: /(<script src="http.*?" type=".*?"><\/script>)/g,
-              replacement: '<script src="js/script.min.js" type="text/javascript"> </script>'
-            },
-            {
               pattern: /(<script src=".*?" type=".*?"><\/script>)/g,
+              replacement: ''
+            },
+            {
+              pattern: /<!-- end user javascript files -->/g,
               replacement: '<script src="js/script.min.js" type="text/javascript"></script>'
             },
             {

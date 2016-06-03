@@ -1,11 +1,9 @@
-/* global Backbone, jQuery, _ */
 // This is the test js script for minification and lint
 'use strict';
 
-var Test = Backbone.Model.extend({
-  initialize: function() {
-                console.log('Welcome to the generic app boilertemplate');
-              }
-});
+var body = document.getElementById('app');
+var container = document.createElement('div');
+body.appendChild(container);
 
-var test = new Test();
+var testModel = new TestModel();
+var testView = new TestView({model: testModel, el: container});

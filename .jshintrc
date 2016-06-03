@@ -19,6 +19,7 @@
   "globalstrict": true,
   "trailing": true,
   "smarttabs": true,
+  "-W117": true,
   "predef": [
   ],
   "globals": {
