@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         dest: 'public/css/style.css',
       },
       js: {
-        src: ['node_modules/underscore/underscore-min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/backbone/backbone-min.js', 'app/js/**/*.js'],
+        src: ['node_modules/underscore/underscore-min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/backbone/backbone-min.js', 'node_modules/backbone.stickit/backbone.stickit.js', 'app/js/**/*.js'],
         dest: 'public/js/script.js',
       },
     },

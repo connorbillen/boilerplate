@@ -1,5 +1,4 @@
-/*global $, Backbone, _*/
-
+/* global Backbone, jQuery, _ */
 // This is the test js script for minification and lint
 'use strict';
 
